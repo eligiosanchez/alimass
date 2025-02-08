@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend-staging:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    env_file:
+      - ./backend/.env.staging
+    networks:
+      - alimass-staging
+
+  frontend-staging:
+    build: ./frontend
+    ports:
+      - "3002:3000"
+    depends_on:
+      - backend-staging
+    networks:
+      - alimass-staging
+
+networks:
+  alimass-staging:
